@@ -3,24 +3,25 @@
  * @version:
  * @Author: Jason chen
  * @Date: 2021-08-18 14:22:19
- * @LastEditors: sueRimn
- * @LastEditTime: 2021-08-19 18:14:41
+ * @LastEditors: Jason chen
+ * @LastEditTime: 2021-08-23 15:05:02
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const address = require("address");
 // 模块联邦的插件
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
 const port = 3002;
 const result = {
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'deploy'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -45,6 +46,14 @@ const result = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, './public'),
+          to: '',
+        },
+      ]
+    }),
     new ProgressBarPlugin(),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
@@ -56,7 +65,7 @@ const result = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: './/public/index.html'
+      template: './/public/index.ejs'
     }),
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
@@ -67,7 +76,8 @@ const result = {
       // 导入模块
       remotes: {
         // '导入别名':'远程应用名称/远程应用地址/导入文件的名称'
-        'mfpVueAppOne': 'vueAppOne@http://localhost:3001/app1.js'
+        'mfpVueAppOne': process.env.NODE_ENV === 'development' ? `vueAppOne@http://localhost:${port}/output/app1.js` : `vueAppOne@./output/app1.js`
+        // 'mfpVueAppOne': 'vueAppOne@http://localhost:3002/output/app1.js'
       },
     })
   ],
