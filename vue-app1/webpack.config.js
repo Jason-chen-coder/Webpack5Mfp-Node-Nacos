@@ -3,14 +3,15 @@
  * @version:
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
- * @LastEditors: sueRimn
- * @LastEditTime: 2021-08-19 18:16:41
+ * @LastEditors: Jason chen
+ * @LastEditTime: 2021-08-23 16:03:55
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const address = require("address");
 const port = 3001;
 // 模块联邦的插件
@@ -55,6 +56,14 @@ const result = {
     quiet: true, // necessary for FriendlyErrorsPlugin
   },
   plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, './public'),
+          to: '',
+        },
+      ]
+    }),
     new ProgressBarPlugin(),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
