@@ -29,6 +29,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "copy-webpack-plugin": "^9.0.1"
+    "copy-webpack-plugin": "^9.0.1",
+    "vue-i18n": "^8.25.0"
   }
 }

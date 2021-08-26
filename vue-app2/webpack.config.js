@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:22:19
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-23 15:05:02
+ * @LastEditTime: 2021-08-25 17:55:30
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -76,8 +76,8 @@ const result = {
       // 导入模块
       remotes: {
         // '导入别名':'远程应用名称/远程应用地址/导入文件的名称'
-        'mfpVueAppOne': process.env.NODE_ENV === 'development' ? `vueAppOne@http://localhost:${port}/output/app1.js` : `vueAppOne@./output/app1.js`
-        // 'mfpVueAppOne': 'vueAppOne@http://localhost:3002/output/app1.js'
+        // 'mfpVueAppOne': process.env.NODE_ENV === 'development' ? `vueAppOne@http://localhost:${port}/output/app1.js` : `vueAppOne@./output/app1.js`
+        'mfpVueAppOne': 'vueAppOne@http://localhost:3001/app1.js'
       },
     })
   ],

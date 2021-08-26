@@ -3,20 +3,18 @@
  * @version:
  * @Author: Jason chen
  * @Date: 2021-08-18 14:20:44
- * @LastEditors: sueRimn
- * @LastEditTime: 2021-08-18 16:21:12
+ * @LastEditors: Jason chen
+ * @LastEditTime: 2021-08-25 11:03:15
  */
-import addCount from './untils'
-addCount(3, 4);
+import { i18n } from './language/index'
+import('mfpVueAppOne/applang').then(res => {
+  i18n.mergeLocaleMessage('en', res.en)
+  i18n.mergeLocaleMessage('zh', res.zh)
+})
 import Vue from 'vue'
 import App from './App.vue'
 new Vue({
-  render: h => h(App)
+  i18n,
+  render: h => h(App),
 }).$mount('#app')
-
-// 联邦调用
-//调用app1的模块
-import('mfpVueAppOne/untils').then(res => {
-  res.default(31, 2)
-})
 

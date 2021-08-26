@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-23 16:03:55
+ * @LastEditTime: 2021-08-26 14:39:08
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -75,7 +75,7 @@ const result = {
       },
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.ejs'
     }),
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
@@ -85,6 +85,8 @@ const result = {
       filename: 'app1.js',
       exposes: {
         //模块名称
+        './applang': './src/language/index.js',
+        './cloneDeep': './src/untils/cloneDeep.js',
         './untils': './src/untils/count.js',
         './appOneChildren': './src/App.vue'
       },

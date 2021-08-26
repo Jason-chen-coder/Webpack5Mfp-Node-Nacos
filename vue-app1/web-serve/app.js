@@ -4,11 +4,10 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-23 15:07:01
+ * @LastEditTime: 2021-08-25 10:17:18
  */
 const express = require('express');
 const proxy = require('http-proxy-middleware');
-
 // webpack打包好gzip文件
 const expressStaticGzip = require('express-static-gzip');
 const app = express();
@@ -32,7 +31,6 @@ app.use(express.static('../output'));
 
 
 app.listen(9900, (req, res) => {
-  console.log(req, res);
-  console.log('启动成功，请通过localhost:9900访问');
+  console.log('启动成功:', 'localhost:9900');
 });
 
