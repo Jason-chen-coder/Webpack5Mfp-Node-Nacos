@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:22:19
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-25 17:55:30
+ * @LastEditTime: 2021-08-27 11:17:26
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
