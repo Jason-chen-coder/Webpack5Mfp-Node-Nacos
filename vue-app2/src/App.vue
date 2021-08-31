@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:45:39
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-25 17:58:45
+ * @LastEditTime: 2021-08-31 16:09:26
 -->
 <template>
   <div class="vue-app1">
@@ -24,22 +24,13 @@ export default {
     // appOneChildren: () => import('mfpVueAppOne/appOneChildren')
     appOneChildren: (async () => {
       const app1 = await loadRemoteComponent({
-        url: 'http://localhost:3001/app1.js',
+        url: './output/app1.js',
         scope: 'vueAppOne',
         module: './appOneChildren'
       })
       return app1
     })
   },
-  mounted () {
-    this.$nextTick(() => {
-      console.log(this.$refs)
-      console.log(this)
-    })
-    import('mfpVueAppOne/cloneDeep').then((res) => {
-      console.log('res', res.default({ 'a': 'aaaaa' }))
-    })
-  }
 }
 </script>
 

@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-27 11:22:32
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-27 14:09:32
+ * @LastEditTime: 2021-08-31 14:05:56
  */
 // 注册服务到Nacos服务器
 const {
@@ -32,18 +32,22 @@ const client = new NacosNamingClient({
   serverList: nacosServerAddress,
   namespace: providerNamespase,
 });
-console.log('[Nacos] 注册Nacos服务',);
+
 (async () => {
-  const allinstance = await client.getAllInstances()
-  console.log('[Nacos]----allinstance----', allinstance)
-});
+  const allInstances = await client.getAllInstances()
+  console.log('[Nacos]----allInstances----', allInstances)
+})();
+
 (async () => {
   try {
     await client.ready();
     // 注册服务和实例
     await client.registerInstance(providerServiceName, {
       ip: ipAddr,
-      port
+      port,
+      metadata: {
+        a: 1
+      }
     });
     // 这里也可以传入group，不传默认就是 DEFAULT_GROUP
     // const groupName = 'nodejs';
@@ -51,12 +55,15 @@ console.log('[Nacos] 注册Nacos服务',);
     // ip: ipAddr,
     // port
     // }, groupName);
-    console.log(`[Nacos] Nacos服务注册成功: ${ipAddr}:${port}`);
+    console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`);
   } catch (err) {
-    console.log('[Nacos] Nacos服务注册失败: ' + err.toString());
+    console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString());
   }
 })();
-
+// 监听远程nacos配置变化
+client.subscribe(providerServiceName, content => {
+  console.log('[Nacos] 监听远程nacos配置:', content);
+});
 // (async () => {
 //   try {
 //     await client.close();

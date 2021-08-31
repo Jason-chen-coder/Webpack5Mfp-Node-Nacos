@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:22:19
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-27 11:17:26
+ * @LastEditTime: 2021-08-31 16:03:11
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -73,11 +73,15 @@ const result = {
       name: 'vueAppTwo',
       //调用放引用的文件名称
       filename: 'app2.js',
+      exposes: {
+        //模块名称
+        './appTwoChildren': './src/App.vue'
+      },
       // 导入模块
       remotes: {
         // '导入别名':'远程应用名称/远程应用地址/导入文件的名称'
         // 'mfpVueAppOne': process.env.NODE_ENV === 'development' ? `vueAppOne@http://localhost:${port}/output/app1.js` : `vueAppOne@./output/app1.js`
-        'mfpVueAppOne': 'vueAppOne@http://localhost:3001/app1.js'
+        // 'mfpVueAppOne': 'vueAppOne@http://localhost:3001/app1.js'
       },
     })
   ],

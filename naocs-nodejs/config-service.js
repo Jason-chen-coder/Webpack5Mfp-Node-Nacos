@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-27 10:05:04
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-27 14:03:06
+ * @LastEditTime: 2021-08-27 17:05:22
  */
 // 注册配置,获取配置
 const NacosConfigClient = require('nacos').NacosConfigClient;
@@ -27,14 +27,14 @@ const configClient = new NacosConfigClient({
   const content1 = await configClient.getConfig(dataId, group);
   console.log('[Nacos] 获取配置： ', content1);
 
-})()
+})();
 
 // 监听远程nacos配置变化
 configClient.subscribe({
   dataId: dataId,
   group: group,
 }, content => {
-  console.log('[Nacos] 配置发生改变:', content);
+  console.log('[Nacos] 监听远程nacos配置:', content);
 });
 
 // 发布配置
