@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-31 16:02:03
+ * @LastEditTime: 2021-09-01 15:46:13
  */
 const express = require('express');
 const proxy = require('http-proxy-middleware');
@@ -80,12 +80,16 @@ const client = new NacosNamingClient({
     console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString());
   }
 })();
-(async () => {
-  const allinstance = await client.getAllInstances()
-  console.log('[Nacos]----所有实例----', allinstance)
-});
+
 
 // 监听远程nacos配置变化
 client.subscribe({ serviceName: providerServiceName }, content => {
   console.log('[Nacos] 监听远程nacos配置:', content);
 });
+
+// 获取所有实例
+(async () => {
+  // const allinstance = await client.getAllInstances()
+  const allinstance = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT')
+  console.log('[Nacos]----所有实例----', allinstance)
+})();
