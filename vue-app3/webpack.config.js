@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 11:21:57
+ * @LastEditTime: 2021-09-03 18:02:15
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -26,19 +26,6 @@ const result = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.less$/i,
-        use: [
-          // compiles Less to CSS
-          'style-loader',
-          'css-loader',
-          'less-loader',
-        ],
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
@@ -48,6 +35,47 @@ const result = {
           //hotReload: false,//根据环境变量生成
         }
       },
+      {
+        oneOf: [
+          {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader"],
+          },
+          {
+            test: /\.less$/i,
+            use: [
+              // compiles Less to CSS
+              'style-loader',
+              'css-loader',
+              'less-loader',
+            ],
+          },
+          {
+            test: /\.(png|jpg|gif)$/i,
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 150,//文件大小限制，小于则用base64编码
+                  esModule: false, //关闭es模块语法
+                  name: 'images/[name]_[hash:7].[ext]'
+
+                }
+              }
+            ],
+            type: 'javascript/auto'
+          },
+          {
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+            loader: 'url-loader',
+            options: {
+              limit: 0,
+              name: '/font/[name].[contenthash:7].[ext]',
+            },
+            type: 'javascript/auto'
+          },
+        ]
+      }
     ],
   },
   devServer: {

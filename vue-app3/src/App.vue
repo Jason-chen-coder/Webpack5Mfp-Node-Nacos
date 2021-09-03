@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 11:39:24
+ * @LastEditTime: 2021-09-03 10:17:25
 -->
 <template>
   <div class="vue-app3">
@@ -25,33 +25,39 @@
 import { loadRemoteComponent } from './untils/index.js'
 export default {
   components: {
-    appTwoChildren: (async () => {
-      let res = await fetch('/nacos/getAllInstances', {
-        method: 'get'
-      })
-      let nacosInstancesList = await res.json();
-      let app2Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app2')).pop();
-      const app2 = await loadRemoteComponent({
-        url: `http://${app2Info.metadata.address}`,
-        scope: 'vueAppTwo',
-        module: './appTwoChildren'
-      })
-      return app2
-    }),
-    appOneChildren: (async () => {
-      let res = await fetch('/nacos/getAllInstances', {
-        method: 'get'
-      })
-      let nacosInstancesList = await res.json();
-      let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
-      console.log(app1Info.metadata.address, 'app1Info.metadata.address')
-      const app1 = await loadRemoteComponent({
-        url: `http://${app1Info.metadata.address}`,
-        scope: 'vueAppOne',
-        module: './appOneChildren'
-      })
-      return app1
-    })
+    // appTwoChildren: (async () => {
+    //   let nacosInstancesList;
+    //   try {
+    //     let res = await fetch('/nacos/getAllInstances', {
+    //       method: 'get'
+    //     })
+    //     nacosInstancesList = await res.json();
+    //   } catch {
+
+    //   }
+    //   console.log('nacosInstancesList', nacosInstancesList)
+    //   let app2Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app2')).pop();
+    //   const app2 = await loadRemoteComponent({
+    //     url: `http://${app2Info.metadata.address}`,
+    //     scope: 'vueAppTwo',
+    //     module: './appTwoChildren'
+    //   })
+    //   return app2
+    // }),
+    // appOneChildren: (async () => {
+    //   let res = await fetch('/nacos/getAllInstances', {
+    //     method: 'get'
+    //   })
+    //   let nacosInstancesList = await res.json();
+    //   let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
+    //   console.log(app1Info.metadata.address, 'app1Info.metadata.address')
+    //   const app1 = await loadRemoteComponent({
+    //     url: `http://${app1Info.metadata.address}`,
+    //     scope: 'vueAppOne',
+    //     module: './appOneChildren'
+    //   })
+    //   return app1
+    // })
   },
 };
 </script>

@@ -4,17 +4,14 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 10:11:06
+ * @LastEditTime: 2021-09-02 16:59:48
  */
 const express = require('express');
 const app = express();
 
 // nacos相关
 const { NacosNamingClient, } = require('nacos');
-const { address } = require('ip');
-// 动态获取本机 IP 地址
-const ipAddr = address();
-// 我们当前app1应用的端口号
+// 我们当前应用的端口号
 const port = 9090
 const logger = console
 // 服务名称，后面消费方调用的时候通过这个服务名进行服务查询。
@@ -28,8 +25,8 @@ const providerNamespase = 'edsp-domain';
 app.use(express.static('../deploy'));
 
 
-app.listen(port, (req, res) => {
-  console.log('启动成功:', `localhost:${port}`);
+app.listen(port, () => {
+  console.log(`启动成功:localhost:${port}`);
 });
 
 // 注册服务到Nacos服务器
@@ -55,4 +52,4 @@ app.get('/nacos/getAllInstances', async (req, res) => {
 //   // console.log(allInstances)
 // })();
 // 开启订阅
-client.subscribe({ serviceName: providerServiceName, groupName: 'DEFAULT_GROUP' }, () => { })
+// client.subscribe({ serviceName: providerServiceName, groupName: 'DEFAULT_GROUP' }, () => { })

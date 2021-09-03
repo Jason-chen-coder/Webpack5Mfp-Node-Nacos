@@ -4,12 +4,9 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-01 15:46:13
+ * @LastEditTime: 2021-09-02 17:16:03
  */
 const express = require('express');
-const proxy = require('http-proxy-middleware');
-// webpack打包好gzip文件
-const expressStaticGzip = require('express-static-gzip');
 const app = express();
 
 // nacos相关
@@ -27,26 +24,12 @@ const nacosServerAddress = '10.22.5.14:32572';
 // namespace: 命名空间必须在服务器上存在
 const providerNamespase = 'edsp-domain';
 
-app.use(
-  expressStaticGzip('../', {
-    maxAge: '3d',
-    setHeaders: setCustomCacheControl,
-  })
-);
-
-function setCustomCacheControl (res, currentFilePath, stat) {
-  if (currentFilePath.match(/\index\.html$/)) {
-    // Custom Cache-Control for HTML files
-    res.setHeader('Cache-Control', 'no-cache');
-  }
-}
-
-app.use(express.static('../output'));
+app.use(express.static('../deploy'));
 
 
 
-app.listen(9900, (req, res) => {
-  console.log('启动成功:', 'localhost:9900');
+app.listen(port, () => {
+  console.log(`启动成功:localhost:${port}`);
 });
 
 // 注册服务到Nacos服务器
@@ -69,12 +52,6 @@ const client = new NacosNamingClient({
         address: `${ipAddr}:${port}/app1.js`
       }
     });
-    // 这里也可以传入group，不传默认就是 DEFAULT_GROUP
-    // const groupName = 'nodejs';
-    // await client.registerInstance(providerServiceName, {
-    // ip: ipAddr,
-    // port
-    // }, groupName);
     console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`);
   } catch (err) {
     console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString());
@@ -82,14 +59,14 @@ const client = new NacosNamingClient({
 })();
 
 
-// 监听远程nacos配置变化
-client.subscribe({ serviceName: providerServiceName }, content => {
-  console.log('[Nacos] 监听远程nacos配置:', content);
-});
+// // 监听远程nacos配置变化
+// client.subscribe({ serviceName: providerServiceName }, content => {
+//   console.log('[Nacos] 监听远程nacos配置:', content);
+// });
 
-// 获取所有实例
-(async () => {
-  // const allinstance = await client.getAllInstances()
-  const allinstance = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT')
-  console.log('[Nacos]----所有实例----', allinstance)
-})();
+// // 获取所有实例
+// (async () => {
+//   // const allinstance = await client.getAllInstances()
+//   const allinstance = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT')
+//   console.log('[Nacos]----所有实例----', allinstance)
+// })();

@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:11:37
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 14:42:46
+ * @LastEditTime: 2021-09-03 10:28:29
  */
 import { i18n } from './language/index'
 import { loadRemoteComponent } from './untils/index.js'
@@ -21,18 +21,30 @@ import Vue from 'vue';
 //   i18n.mergeLocaleMessage('zh', res.zh)
 // })()
 (async () => {
-  let res = await fetch('/nacos/getAllInstances', {
-    method: 'get'
-  })
-  let nacosInstancesList = await res.json();
-  let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
-  const { en, zh } = await loadRemoteComponent({
-    url: `http://${app1Info.metadata.address}`,
-    scope: 'vueAppOne',
-    module: './applang'
-  })
-  i18n.mergeLocaleMessage('en', en)
-  i18n.mergeLocaleMessage('zh', zh)
+  let nacosInstancesList;
+  let langObj
+  try {
+    let res = await fetch('/nacos/getAllInstances', {
+      method: 'get'
+    })
+    nacosInstancesList = await res.json();
+    let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
+    langObj = await loadRemoteComponent({
+      url: app1Info ? `http://${app1Info.metadata.address}` : '/mfpApps/app1/deploy/app1.js',
+      scope: 'vueAppOne',
+      module: './applang'
+    })
+
+  } catch {
+    langObj = await loadRemoteComponent({
+      url: '/mfpApps/app1/deploy/app1.js',
+      scope: 'vueAppOne',
+      module: './applang'
+    })
+  }
+  i18n.mergeLocaleMessage('en', langObj.en)
+  i18n.mergeLocaleMessage('zh', langObj.zh)
+
 })()
 
 new Vue({

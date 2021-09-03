@@ -4,11 +4,9 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-08-31 16:02:29
+ * @LastEditTime: 2021-09-02 17:15:22
  */
 const express = require('express');
-
-const expressStaticGzip = require('express-static-gzip');
 const app = express();
 // nacos
 const { NacosNamingClient } = require('nacos');
@@ -24,26 +22,12 @@ const providerServiceName = 'edsp-component-app1';
 const nacosServerAddress = '10.22.5.14:32572';
 // namespace: 命名空间必须在服务器上存在
 const providerNamespase = 'edsp-domain';
-app.use(
-  expressStaticGzip('../', {
-    maxAge: '3d',
-    setHeaders: setCustomCacheControl,
-  })
-);
-
-function setCustomCacheControl (res, currentFilePath, stat) {
-  if (currentFilePath.match(/\index\.html$/)) {
-    // Custom Cache-Control for HTML files
-    res.setHeader('Cache-Control', 'no-cache');
-  }
-}
 
 app.use(express.static('../deploy'));
 
 
-app.listen(port, (req, res) => {
-  console.log(req, res);
-  console.log('启动成功，请通过localhost:9901访问');
+app.listen(port, () => {
+  console.log(`启动成功，请通过localhost:${port}访问`);
 });
 
 
@@ -72,12 +56,13 @@ const client = new NacosNamingClient({
     // ip: ipAddr,
     // port
     // }, groupName);
-    console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`);
+    console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}: ${port}`);
   } catch (err) {
     console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString());
   }
 })();
-// 监听远程nacos配置变化
-client.subscribe({ serviceName: providerServiceName }, content => {
-  console.log('[Nacos] 监听远程nacos配置:', content);
-});
+
+// // 监听远程nacos配置变化
+// client.subscribe({ serviceName: providerServiceName }, content => {
+//   console.log('[Nacos] 监听远程nacos配置:', content);
+// });
