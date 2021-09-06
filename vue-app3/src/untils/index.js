@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:20:50
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 12:07:31
+ * @LastEditTime: 2021-09-06 13:59:02
  */
 
 export async function loadRemoteComponent (config) {

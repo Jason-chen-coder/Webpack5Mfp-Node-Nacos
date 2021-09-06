@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-03 18:02:15
+ * @LastEditTime: 2021-09-06 14:07:02
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -70,6 +70,7 @@ const result = {
             loader: 'url-loader',
             options: {
               limit: 0,
+              esModule: false, //关闭es模块语法
               name: '/font/[name].[contenthash:7].[ext]',
             },
             type: 'javascript/auto'
@@ -90,6 +91,15 @@ const result = {
         //pathRewrite方法重写url
         pathRewrite: {
           '^/nacos': '/nacos'
+        }
+      },
+      '/font': {
+        target: 'http://localhost:9900',//代理地址，这里设置的地址会代替axios中设置的baseURL
+        changeOrigin: true,// 如果接口跨域，需要进行这个参数配置
+        //ws: true, // proxy websockets
+        //pathRewrite方法重写url
+        pathRewrite: {
+          '^/font': '/font'
         }
       }
     }

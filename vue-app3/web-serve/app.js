@@ -4,11 +4,13 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 16:59:48
+ * @LastEditTime: 2021-09-06 10:36:46
  */
 const express = require('express');
 const app = express();
-
+const { address } = require('ip');
+// 动态获取本机 IP 地址
+const ipAddr = address();
 // nacos相关
 const { NacosNamingClient, } = require('nacos');
 // 我们当前应用的端口号
@@ -26,7 +28,10 @@ app.use(express.static('../deploy'));
 
 
 app.listen(port, () => {
-  console.log(`启动成功:localhost:${port}`);
+  console.log(`-------------App3 服务启动成功-------------`);
+  console.log(`- Local : http://localhost:${port} `);
+  console.log(`- NetWork: http://${ipAddr}:${port} `);
+  console.log(`-------------------------------------------`);
 });
 
 // 注册服务到Nacos服务器

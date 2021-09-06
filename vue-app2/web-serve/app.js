@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 17:15:22
+ * @LastEditTime: 2021-09-06 10:30:15
  */
 const express = require('express');
 const app = express();
@@ -27,7 +27,10 @@ app.use(express.static('../deploy'));
 
 
 app.listen(port, () => {
-  console.log(`启动成功，请通过localhost:${port}访问`);
+  console.log(`-------------App2 服务启动成功-------------`);
+  console.log(`- Local : http://localhost:${port} `);
+  console.log(`- NetWork: http://${ipAddr}:${port} `);
+  console.log(`-------------------------------------------`);
 });
 
 

@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-03 17:44:34
+ * @LastEditTime: 2021-09-06 16:09:26
 -->
 <template>
   <div class="vue-app1">
@@ -13,11 +13,17 @@
       引入国际化: <b>i18n:{{ $t("home1.lang1") }}</b>
     </div>
     <div>引入图片:<img src="./assets/images/webpackimage.png" alt="" /></div>
-    <div>引入字体图标:<span class="iconfont icon-zuhe"></span></div>
-    <div style="display: flex"><span>子组件:</span><children></children></div>
+    <div>引入字体图标(CSS):<span class="iconfont icon-zuhe"></span></div>
+    <div>
+      引入字体图标(JS):<svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-dulitixi-copy-copy-copy-copy-copy"></use>
+      </svg>
+    </div>
+    <children></children>
   </div>
 </template>
 <script>
+
 import children from './components/children.vue'
 export default {
   components: {
@@ -30,9 +36,6 @@ export default {
 <style>
 .vue-app1 {
   border: black solid 1px;
-  background-image: url(./assets/images/ModuleFederationPlugin.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  padding: 10px;
 }
 </style>

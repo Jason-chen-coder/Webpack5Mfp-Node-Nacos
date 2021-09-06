@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-02 17:16:03
+ * @LastEditTime: 2021-09-06 10:56:32
  */
 const express = require('express');
 const app = express();
@@ -29,7 +29,10 @@ app.use(express.static('../deploy'));
 
 
 app.listen(port, () => {
-  console.log(`启动成功:localhost:${port}`);
+  console.log(`-------------App1 服务启动成功-------------`);
+  console.log(`- Local : http://localhost:${port} `);
+  console.log(`- NetWork: http://${ipAddr}:${port} `);
+  console.log(`-------------------------------------------`);
 });
 
 // 注册服务到Nacos服务器
@@ -49,7 +52,8 @@ const client = new NacosNamingClient({
       port,
       metadata: {
         componentName: 'vue-app1',
-        address: `${ipAddr}:${port}/app1.js`
+        address: `${ipAddr}:${port}/app1.js`,
+        serviceUrl: `${ipAddr}:${port}`
       }
     });
     console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`);
