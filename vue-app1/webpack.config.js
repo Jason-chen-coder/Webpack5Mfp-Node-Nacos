@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-06 15:52:48
+ * @LastEditTime: 2021-09-07 10:49:38
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -122,7 +122,6 @@ const result = {
         './untils': './src/untils/count.js',
         './appOneChildren': './src/App.vue',
         './appOneIconfont': './src/assets/iconfont/iconfont.js',
-        './appOneIconfontCss': './src/assets/iconfont/iconfont.css'
       },
     })
   ],

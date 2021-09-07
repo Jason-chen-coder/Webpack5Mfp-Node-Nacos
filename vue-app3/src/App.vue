@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-06 16:07:25
+ * @LastEditTime: 2021-09-07 10:41:49
 -->
 <template>
   <div class="vue-app3">
@@ -27,48 +27,48 @@ export default {
   components: {
     appTwoChildren: (async () => {
       let nacosInstancesList;
+      let serAdd = '';
       try {
         let res = await fetch('/nacos/getAllInstances', {
           method: 'get'
         })
         nacosInstancesList = await res.json();
+        let app2Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app2')).pop();
+        serAdd = `http://${app2Info.metadata.address}`
       } catch {
-
+        serAdd = `./mfpApps/app2/deploy/app2.js`
       }
-      console.log('nacosInstancesList', nacosInstancesList)
-      let app2Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app2')).pop();
       const app2 = await loadRemoteComponent({
-        url: `http://${app2Info.metadata.address}`,
+        url: serAdd,
         scope: 'vueAppTwo',
         module: './appTwoChildren'
       })
       return app2
     }),
     appOneChildren: (async () => {
-      let res = await fetch('/nacos/getAllInstances', {
-        method: 'get'
-      })
-      let nacosInstancesList = await res.json();
-      let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
+      let nacosInstancesList;
+      let serAdd = '';
+      try {
+        let res = await fetch('/nacos/getAllInstances', {
+          method: 'get'
+        })
+        nacosInstancesList = await res.json();
+        let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
+        serAdd = `http://${app1Info.metadata.address}`;
+      } catch {
+        serAdd = `./mfpApps/app1/deploy/app1.js`
+      }
       const app1 = await loadRemoteComponent({
-        url: `http://${app1Info.metadata.address}`,
+        url: serAdd,
         scope: 'vueAppOne',
         module: './appOneChildren'
       })
       // 加载iconfont
       const iconjs = await loadRemoteComponent({
-        url: `http://${app1Info.metadata.address}`,
+        url: serAdd,
         scope: 'vueAppOne',
         module: './appOneIconfont'
       })
-      // console.log(iconjs)
-      // // 加载iconfont
-      // const iconcss = await loadRemoteComponent({
-      //   url: `http://${app1Info.metadata.address}`,
-      //   scope: 'vueAppOne',
-      //   module: './appOneIconfontCss'
-      // })
-      // console.log(iconcss, 'iconcss')
       return app1
     })
   },

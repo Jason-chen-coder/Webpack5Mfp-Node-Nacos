@@ -1,0 +1,212 @@
+{
+  "id": "1870567",
+  "name": "Easy Editor",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13856689",
+      "name": "对话",
+      "font_class": "duihua",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "13856690",
+      "name": "电脑",
+      "font_class": "diannao",
+      "unicode": "e6bb",
+      "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "13856691",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "13856692",
+      "name": "领导",
+      "font_class": "lingdao",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "13856693",
+      "name": "写字",
+      "font_class": "xiezi",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "2404406",
+      "name": "组合",
+      "font_class": "zuhe",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "6151133",
+      "name": "file plus-fill",
+      "font_class": "fileplus-fill",
+      "unicode": "e7c6",
+      "unicode_decimal": 59334
+    },
+    {
+      "icon_id": "6151181",
+      "name": "expand alt-fill",
+      "font_class": "expandalt-fill",
+      "unicode": "e7e4",
+      "unicode_decimal": 59364
+    },
+    {
+      "icon_id": "6151208",
+      "name": "eye-slash",
+      "font_class": "eye-slash",
+      "unicode": "e7ec",
+      "unicode_decimal": 59372
+    },
+    {
+      "icon_id": "6151209",
+      "name": "eye",
+      "font_class": "eye",
+      "unicode": "e7ed",
+      "unicode_decimal": 59373
+    },
+    {
+      "icon_id": "6151304",
+      "name": "reply",
+      "font_class": "reply",
+      "unicode": "e82f",
+      "unicode_decimal": 59439
+    },
+    {
+      "icon_id": "6353293",
+      "name": "share",
+      "font_class": "share",
+      "unicode": "e86e",
+      "unicode_decimal": 59502
+    },
+    {
+      "icon_id": "11307823",
+      "name": "Directory tree",
+      "font_class": "Directory-tree",
+      "unicode": "e892",
+      "unicode_decimal": 59538
+    },
+    {
+      "icon_id": "15406854",
+      "name": "workflow",
+      "font_class": "workflow-copy",
+      "unicode": "f078",
+      "unicode_decimal": 61560
+    },
+    {
+      "icon_id": "15406841",
+      "name": "servicemesh 服务网格",
+      "font_class": "servicemeshfuwuwangge-copy",
+      "unicode": "f076",
+      "unicode_decimal": 61558
+    },
+    {
+      "icon_id": "15406843",
+      "name": "servicemesh 服务网格",
+      "font_class": "servicemeshfu-copy-copy",
+      "unicode": "f077",
+      "unicode_decimal": 61559
+    },
+    {
+      "icon_id": "15353086",
+      "name": "地图类_网格区",
+      "font_class": "dituleiwanggequ-copy",
+      "unicode": "f072",
+      "unicode_decimal": 61554
+    },
+    {
+      "icon_id": "15353101",
+      "name": "方形未选中",
+      "font_class": "fangxingweixuanzhong-copy",
+      "unicode": "f073",
+      "unicode_decimal": 61555
+    },
+    {
+      "icon_id": "13260206",
+      "name": "大气立体观测@1x",
+      "font_class": "daqilitiguancex",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "14647147",
+      "name": "VE",
+      "font_class": "VE",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "14647153",
+      "name": "customer-info",
+      "font_class": "customer-info",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "14647158",
+      "name": "product",
+      "font_class": "product",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "14647188",
+      "name": "distribution",
+      "font_class": "distribution",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "15353138",
+      "name": "立体监控",
+      "font_class": "litijiankong-copy",
+      "unicode": "f074",
+      "unicode_decimal": 61556
+    },
+    {
+      "icon_id": "15353148",
+      "name": "独立体系",
+      "font_class": "dulitixi-copy-copy-copy-copy-copy",
+      "unicode": "f075",
+      "unicode_decimal": 61557
+    },
+    {
+      "icon_id": "3678653",
+      "name": "立体剖切",
+      "font_class": "litipouqie",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "9520747",
+      "name": "容器",
+      "font_class": "rongqi",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "10021503",
+      "name": "立方体 立体 多面体 方块",
+      "font_class": "lifangtilitiduomiantifangkuai",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "10934372",
+      "name": "112 - Search Database (Flat)",
+      "font_class": "-SearchDatabaseFlat",
+      "unicode": "f071",
+      "unicode_decimal": 61553
+    }
+  ]
+}

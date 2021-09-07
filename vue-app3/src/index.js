@@ -4,11 +4,11 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:11:37
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-03 10:28:29
+ * @LastEditTime: 2021-09-07 10:41:13
  */
 import { i18n } from './language/index'
 import { loadRemoteComponent } from './untils/index.js'
-
+require('./assets/iconfont/iconfont.css')
 import App from './App.vue'
 import Vue from 'vue';
 // (async () => {
