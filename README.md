@@ -4,7 +4,7 @@
 
 1、功能相似的页面直接赋值方便，不用费脑力直接复用。但这样就会导致项目中代码的复用性低，代码冗余多等问题出现。
 
-2、微服务的出现，很多业务一般使用 npm 发布的形式管理公共包。我们 EDSP 前端项目也是用了 npm 插件形式;但在使用下来我们发现 npm 比较适合对业务逻辑耦合小，完全工具类的包。而对于业务逻辑比较繁重，更新频繁的模块，npm 包使用就会存在迭代需要更新版本的问题,。 并且 npm 包对于业务代码的拆分有工作量，维护成本相对较大，代码有一定质量要求，否则就会导致模块过大的问题。
+2、微服务的出现，很多业务一般使用 npm 发布的形式管理公共包,使用下来我们发现 npm 比较适合对业务逻辑耦合小，完全工具类的包。而对于业务逻辑比较繁重，更新频繁的模块，npm 包使用就会存在迭代需要更新版本的问题,。 并且 npm 包对于业务代码的拆分有工作量，维护成本相对较大，代码有一定质量要求，否则就会导致模块过大的问题。
 
 3、Module Federation 解决了跨应用代码共享
 
@@ -617,8 +617,11 @@ async function loadComponent({ scope, module }) {
 ![image2021-8-26_14-39-28.png](https://img-blog.csdnimg.cn/80a161ef89f34a1498a023ab27b8e947.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_19,color_FFFFFF,t_70,g_se,x_16)
 
 # webpack5 + Node.js+ Nacos 搭建微前端应用网络
-## 一、关于Nacos
-### 什么是Nacos?
+
+## 一、关于 Nacos
+
+### 什么是 Nacos?
+
 **官方介绍**
 https://nacos.io/zh-cn/docs/what-is-nacos.html
 
@@ -627,44 +630,43 @@ Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一�
 Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 Nacos 是构建以“服务”为中心的现代应用架构 (例如微服务范式、云原生范式) 的服务基础设施。
 
 **简单概括一下**
-Nacos可以做两方面用途：
+Nacos 可以做两方面用途：
 
-	配置服务中心
-	服务注册中心
-nacos调用的完整流程
-整个nacos服务链路上分三种角色：**nacos服务器**，**服务提供方**，**服务消费方**
+    配置服务中心
+    服务注册中心
 
- - 服务提供者告诉nacos服务器，我可以提供服务。
- - 消费方通过访问nacos服务器，根据服务名查询有哪些服务提供方。
- - 消费方获取到具体的服务提供方列表，然后从中选取一个服务提供者调用具体服务。
+nacos 调用的完整流程
+整个 nacos 服务链路上分三种角色：**nacos 服务器**，**服务提供方**，**服务消费方**
 
-搭建Nacos服务中心
+- 服务提供者告诉 nacos 服务器，我可以提供服务。
+- 消费方通过访问 nacos 服务器，根据服务名查询有哪些服务提供方。
+- 消费方获取到具体的服务提供方列表，然后从中选取一个服务提供者调用具体服务。
+
+搭建 Nacos 服务中心
 https://nacos.io/zh-cn/docs/quick-start.html
 
-您可以在Nacos的release notes及博客中找到每个版本支持的功能的介绍，当前推荐的稳定版本为1.3.1。
+您可以在 Nacos 的 release notes 及博客中找到每个版本支持的功能的介绍，当前推荐的稳定版本为 1.3.1。
 
-创建服务提供方NodeJS应用
+创建服务提供方 NodeJS 应用
 初始化环境:
-nacos服务地址:http://10.22.5.14:32572/
+nacos 服务地址:http://10.22.5.14:32572/
 
 安装 Node LST (8.x.x) 环境： https://nodejs.org/zh-cn;我本地安装的Node 版本是 v14.17.4
 
-nacos关于nodejs的sdk:https://github.com/nacos-group/nacos-sdk-nodejs
+nacos 关于 nodejs 的 sdk:https://github.com/nacos-group/nacos-sdk-nodejs
 
+### 创建一个 ndoe 项目:
 
-
-###  创建一个ndoe项目:
 #### 1.执行:
 
 ```js
-npm init 
+npm init
 npm install nacos ip
 ```
-**2.创建config-service和service-discovery文件:**
+
+**2.创建 config-service 和 service-discovery 文件:**
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2fa85878abaa44eba6b128d90412ced3.png)
-
-
 
 **3.注册配置文件**
 
@@ -672,19 +674,19 @@ config-service.js:
 
 ```js
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: Jason chen
  * @Date: 2021-08-27 10:05:04
  * @LastEditors: Jason chen
  * @LastEditTime: 2021-08-27 14:03:06
  */
 // 注册配置,获取配置
-const NacosConfigClient = require('nacos').NacosConfigClient;
+const NacosConfigClient = require('nacos').NacosConfigClient
 // nacos服务地址
-const nacosServerAddress = '10.22.5.14:32572';
+const nacosServerAddress = '10.22.5.14:32572'
 // namespace: 名称空间必须在服务器上存在
-const providerNamespase = 'edsp-domain';
+const providerNamespase = 'domain'
 // 名称空间下的Group
 const group = 'DEFAULT_GROUP'
 // 命名空间下的Data Id
@@ -693,39 +695,41 @@ const dataId = 'test1'
 const configClient = new NacosConfigClient({
   serverAddr: nacosServerAddress,
   namespace: providerNamespase,
-});
-
+})
 
 // 获取nacos配置
-(async () => {
-  const content1 = await configClient.getConfig(dataId, group);
-  console.log('[Nacos] 获取配置： ', content1);
-
+;(async () => {
+  const content1 = await configClient.getConfig(dataId, group)
+  console.log('[Nacos] 获取配置： ', content1)
 })()
 
 // 监听远程nacos配置变化
-configClient.subscribe({
-  dataId: dataId,
-  group: group,
-}, content => {
-  console.log('[Nacos] 监听远程nacos配置:', content);
-});
-
-
+configClient.subscribe(
+  {
+    dataId: dataId,
+    group: group,
+  },
+  (content) => {
+    console.log('[Nacos] 监听远程nacos配置:', content)
+  }
+)
 ```
-   **3.1 执行:**
+
+**3.1 执行:**
 
 ```js
 node config-servce.js
 ```
-   **3.2 执行结果:**
 
-   终端输出结果:
+**3.2 执行结果:**
+
+终端输出结果:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/26a6f6d3b397497aa7080769c1d1e311.png)
-          在nacos中查看配置:
+在 nacos 中查看配置:
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/e94080aefa4d455c812432eed60cd17b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
     3.3 在nacos中修改配置:
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/8cfb465654f142168bf7382f43f4bab8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
     终端监听到配置修改:
@@ -744,58 +748,53 @@ node config-servce.js
  * @LastEditTime: 2021-08-27 14:09:32
  */
 // 注册服务到Nacos服务器
-const {
-  NacosNamingClient,
-} = require('nacos');
+const { NacosNamingClient } = require('nacos')
 
-
-const {
-  address,
-} = require('ip');
+const { address } = require('ip')
 const logger = console
 
 // 动态获取本机 IP 地址
-const ipAddr = address();
+const ipAddr = address()
 // 我们当前app1应用的端口号
 const port = 3001
 
 // 服务名称，后面消费方调用的时候通过这个服务名进行服务查询。
-const providerServiceName = 'edsp-component-app1';
+const providerServiceName = 'component-app1'
 // nacos服务地址
-const nacosServerAddress = '10.22.5.14:32572';
+const nacosServerAddress = '10.22.5.14:32572'
 // namespace: 命名空间必须在服务器上存在
-const providerNamespase = 'edsp-domain';
+const providerNamespase = 'domain'
 const client = new NacosNamingClient({
   logger,
   serverList: nacosServerAddress,
   namespace: providerNamespase,
-});
-console.log('[Nacos] 注册Nacos服务',);
-(async () => {
+})
+console.log('[Nacos] 注册Nacos服务')
+;async () => {
   const allinstance = await client.getAllInstances()
   console.log('[Nacos]----allinstance----', allinstance)
-});
-(async () => {
+}
+;(async () => {
   try {
-    await client.ready();
+    await client.ready()
     // 注册服务和实例
     await client.registerInstance(providerServiceName, {
       ip: ipAddr,
-      port
-    });
+      port,
+    })
     // 这里也可以传入group，不传默认就是 DEFAULT_GROUP
     // const groupName = 'nodejs';
     // await client.registerInstance(providerServiceName, {
     // ip: ipAddr,
     // port
     // }, groupName);
-    console.log(`[Nacos] Nacos服务注册实例成功: ${ipAddr}:${port}`);
+    console.log(`[Nacos] Nacos服务注册实例成功: ${ipAddr}:${port}`)
   } catch (err) {
-    console.log('[Nacos] Nacos服务注册实例失败: ' + err.toString());
+    console.log('[Nacos] Nacos服务注册实例失败: ' + err.toString())
   }
-})();
-
+})()
 ```
+
     4.1 终端执行:
 
 ```js
@@ -810,18 +809,17 @@ node service-discovery.js
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/b69458449b4d46479151372f12af1c2b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-二、基于Node+Nacos 开始搭建服务关系网:
-      以下nacos相关步骤我们主要使用Nacos的服务注册中心功能:整体设计如下图:
+二、基于 Node+Nacos 开始搭建服务关系网:
+以下 nacos 相关步骤我们主要使用 Nacos 的服务注册中心功能:整体设计如下图:
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/8be17224fbcf4c85a1dcf067d3b59628.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-
-我们准备三个项目分别是app1,app2,app3;
+我们准备三个项目分别是 app1,app2,app3;
 
 第一步:
-我们将app1和app2项目进行打包,并在根目录起一个node服务,
+我们将 app1 和 app2 项目进行打包,并在根目录起一个 node 服务,
 
-node服务的作用:
+node 服务的作用:
 
           1.app1服务和app2服务开放deploy目录,供外界访问;
 
@@ -829,131 +827,125 @@ node服务的作用:
 
                 如 address=10.18.31.46:9900/app1.js, 其中app1.js就是webpack模块联邦打包出来的文件,当消费方拿到这个文件即可加载app1通过webpack模块联邦暴露出来的模块
 
-
-
-app1项目目录(app2目录类似):
+app1 项目目录(app2 目录类似):
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/813b825bb7ee475e81dbe7afdee70cde.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 app.js
 
 ```js
-const express = require('express');
-const app = express();
-
+const express = require('express')
+const app = express()
 
 // nacos相关
-const { NacosNamingClient, } = require('nacos');
-const { address } = require('ip');
+const { NacosNamingClient } = require('nacos')
+const { address } = require('ip')
 // 动态获取本机 IP 地址
-const ipAddr = address();
+const ipAddr = address()
 // 我们当前app1应用的端口号
 const port = 9900
 const logger = console
 // 服务名称，后面消费方调用的时候通过这个服务名进行服务查询。
-const providerServiceName = 'edsp-component-app1';
+const providerServiceName = 'component-app1'
 // nacos服务地址
-const nacosServerAddress = '10.22.5.14:32572';
+const nacosServerAddress = '10.22.5.14:32572'
 // namespace: 命名空间必须在服务器上存在
-const providerNamespase = 'edsp-domain';
+const providerNamespase = 'domain'
 
-app.use(express.static('../output'));
-
-
+app.use(express.static('../output'))
 
 app.listen(port, () => {
-  console.log(`启动成功:localhost:${port}`);
-});
+  console.log(`启动成功:localhost:${port}`)
+})
 
 // 注册服务到Nacos服务器
 const client = new NacosNamingClient({
   logger,
   serverList: nacosServerAddress,
   namespace: providerNamespase,
-});
+})
 
-
-(async () => {
+;(async () => {
   try {
-    await client.ready();
+    await client.ready()
     // 注册服务和实例
     await client.registerInstance(providerServiceName, {
       ip: ipAddr,
       port,
       metadata: {
         componentName: 'vue-app1',
-        address: `${ipAddr}:${port}/app1.js`
-      }
-    });
-    console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`);
+        address: `${ipAddr}:${port}/app1.js`,
+      },
+    })
+    console.log(`[Nacos] Nacos服务实例注册成功: ${ipAddr}:${port}`)
   } catch (err) {
-    console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString());
+    console.log('[Nacos] Nacos服务实例注册失败: ' + err.toString())
   }
-})();
+})()
 ```
-启动app1和app2的node服务:
 
+启动 app1 和 app2 的 node 服务:
 
-
-分别到app1和app2中web-serve目录下执行:
+分别到 app1 和 app2 中 web-serve 目录下执行:
 
 ```js
 node app.js
 ```
-当app1和app2的实例注册到nacos成功后
+
+当 app1 和 app2 的实例注册到 nacos 成功后
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a52e577e78c04e3b95d10fe58e05eefc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-
-
-
 第二步:
-我们在app3根目录起一个node服务,
+我们在 app3 根目录起一个 node 服务,
 
-app3项目目录:
+app3 项目目录:
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2ed950ad728c445f86909ad4b0af8d82.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 app.js
 
 ```js
-const express = require('express');
-const app = express();
-
+const express = require('express')
+const app = express()
 
 // nacos相关
-const { NacosNamingClient, } = require('nacos');
+const { NacosNamingClient } = require('nacos')
 // 我们当前应用的端口号
 const port = 9090
 const logger = console
 // 服务名称，后面消费方调用的时候通过这个服务名进行服务查询。
-const providerServiceName = 'edsp-component-app1';
+const providerServiceName = 'component-app1'
 // nacos服务地址
-const nacosServerAddress = '10.22.5.14:32572';
+const nacosServerAddress = '10.22.5.14:32572'
 // namespace: 命名空间必须在服务器上存在
-const providerNamespase = 'edsp-domain';
+const providerNamespase = 'domain'
 
-
-app.use(express.static('../deploy'));
-
+app.use(express.static('../deploy'))
 
 app.listen(port, () => {
-  console.log(`启动成功:localhost:${port}`);
-});
+  console.log(`启动成功:localhost:${port}`)
+})
 
 // 注册服务到Nacos服务器
 const client = new NacosNamingClient({
   logger,
   serverList: nacosServerAddress,
   namespace: providerNamespase,
-});
+})
 // app3前端页面发起查询实例列表请求
 app.get('/nacos/getAllInstances', async (req, res) => {
-  let allInstances = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT', false)
-  res.send(allInstances);
-});
+  let allInstances = await client.getAllInstances(
+    providerServiceName,
+    'DEFAULT_GROUP',
+    'DEFAULT',
+    false
+  )
+  res.send(allInstances)
+})
 ```
-启动app3的node服务:到app3中web-serve目录下执行:
+
+启动 app3 的 node 服务:到 app3 中 web-serve 目录下执行:
 
 ```js
 node app.js
@@ -967,7 +959,7 @@ node app.js
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/1fea4fd3d15946b2a7ee9c309edb71c3.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-说明:app3的前端页面发起  '/nacos/getAllInstances'  这个请求会走到app3的node服务,通过node服务查询到nacos的实例列表后返回给前端,前端再拿到app1和app2的资源地址;
+说明:app3 的前端页面发起 '/nacos/getAllInstances' 这个请求会走到 app3 的 node 服务,通过 node 服务查询到 nacos 的实例列表后返回给前端,前端再拿到 app1 和 app2 的资源地址;
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/ee42bb159db5457b925a26c90ad2bae7.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
@@ -975,11 +967,8 @@ node app.js
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2693ba1846cd444cbb03ae14e8f3c488.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-
-
-场景1:消费方因为网络或等其他原因获取不到远端提供方的资源时;(如当远端的应用掉线了或消费方这边发起的查询消费方服务的请求出错)
+场景 1:消费方因为网络或等其他原因获取不到远端提供方的资源时;(如当远端的应用掉线了或消费方这边发起的查询消费方服务的请求出错)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/780ac19b9f8e49bd985a08e3ebb2c82b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
-
 
 解决方案:
 
@@ -987,31 +976,31 @@ node app.js
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/e12200356648459cb5d49c3472d6fda0.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_12,color_FFFFFF,t_70,g_se,x_16)
 
-第二步:当消费方获取提供方资源时,直接获取本地目录中关于提供方经过模块联邦打包后的的js文件(app1.js和app2.js)即可;
+第二步:当消费方获取提供方资源时,直接获取本地目录中关于提供方经过模块联邦打包后的的 js 文件(app1.js 和 app2.js)即可;
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a097ac910d4a4d57b3e3b9599b196e90.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
-
 
 第三步效果:
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a3fc8efb7f314e5cb483a8bf3a98c78e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-我们从此处可以看到虽然getAllInstance这个接口报错了(获取不到远端提供方的静态资源地址);但我们可选择加载本地准备好的的资源进行渲染;
+我们从此处可以看到虽然 getAllInstance 这个接口报错了(获取不到远端提供方的静态资源地址);但我们可选择加载本地准备好的的资源进行渲染;
 
-场景2:消费方无法正常获取提供方的字体图标资源:
-解决方案1:消费方的字体图标库需要包含提供方的字体图标库;(即提供方中字体图标的类名在消费方的环境中(iconfont.css)中是可以匹配到的)
+场景 2:消费方无法正常获取提供方的字体图标资源:
+解决方案 1:消费方的字体图标库需要包含提供方的字体图标库;(即提供方中字体图标的类名在消费方的环境中(iconfont.css)中是可以匹配到的)
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/18e8dc27e30c4e0686f8da4a128ab0d2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
-解决方案2:
+解决方案 2:
 
     第一步:提供方通过模块联邦暴露iconfont.js文件(此方法需要提供方使用svg的形式来渲染字体图标)
 
       1.1参考iconfont官方提供的 symbol 引用方式 :
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/4635fdf74d324c4bbf7851f9ae3bc4ea.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
       1.2 提供方字体元素使用svg ;
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2e3403c576cc4e9993dfe2dab7ebef00.png)
 
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2e3403c576cc4e9993dfe2dab7ebef00.png)
 
       1.3 提供方并暴露iconfont.js文件:
 
@@ -1019,10 +1008,7 @@ node app.js
 
     第二步:消费方加载提供方的iconfont.js文件即可
 
-
-
 ![](https://img-blog.csdnimg.cn/4422ece283da41feaab80c46101b606a.png)
-
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/8797168f27684fdeb7f043b0ba0aef6e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6IqC55yB6ZKx,size_20,color_FFFFFF,t_70,g_se,x_16)
 
