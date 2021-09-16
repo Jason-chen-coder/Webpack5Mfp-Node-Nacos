@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-16 11:13:40
+ * @LastEditTime: 2021-09-16 15:38:35
 -->
 <template>
   <div class="vue-app3">
@@ -22,18 +22,13 @@
   </div>
 </template>
 <script>
-import { loadRemoteComponent, loadLink } from './untils/index.js'
+import { loadRemoteComponent, getComponentInfo } from './untils/index.js'
 export default {
   components: {
     appTwoChildren: (async () => {
-      let nacosInstancesList;
       let serAdd = '';
       try {
-        let res = await fetch('/nacos/getAllInstances', {
-          method: 'get'
-        })
-        nacosInstancesList = await res.json();
-        let app2Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app2')).pop();
+        let app2Info = await getComponentInfo('app2')
         serAdd = `http://${app2Info.metadata.address}`
       } catch {
         serAdd = `./mfpApps/app2/deploy/app2.js`
@@ -46,16 +41,10 @@ export default {
       return app2
     }),
     appOneChildren: (async () => {
-      let nacosInstancesList;
       let serAdd = '';
       try {
-        let res = await fetch('/nacos/getAllInstances', {
-          method: 'get'
-        })
-        nacosInstancesList = await res.json();
-        let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
+        let app1Info = await getComponentInfo('app1')
         serAdd = `http://${app1Info.metadata.address}`;
-        console.log('----------', serAdd)
       } catch {
         serAdd = `./mfpApps/app1/deploy/app1.js`
       }
@@ -65,16 +54,13 @@ export default {
         module: './appOneChildren'
       })
       // 加载iconfont
-      const iconjs = await loadRemoteComponent({
+      await loadRemoteComponent({
         url: serAdd,
         scope: 'vueAppOne',
         module: './appOneIconfont'
       })
       return app1
     })
-  },
-  mounted () {
-
   },
 };
 </script>
