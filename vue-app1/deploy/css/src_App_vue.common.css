@@ -1,15 +1,150 @@
-/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/less-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/children.vue?vue&type=style&index=0&lang=less& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[1]!./src/assets/iconfont/iconfont.css ***!
+  \************************************************************************************************************************/
+@font-face {
+  font-family: "iconfont"; /* Project id 1870567 */
+  src: url(./vue-app-one/css/iconfont.woff2) format('woff2'),
+       url(./vue-app-one/css/iconfont.woff) format('woff'),
+       url(./vue-app-one/css/iconfont.ttf) format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-duihua:before {
+  content: "\e6ba";
+}
+
+.icon-diannao:before {
+  content: "\e6bb";
+}
+
+.icon-shouye:before {
+  content: "\e6bc";
+}
+
+.icon-lingdao:before {
+  content: "\e6bd";
+}
+
+.icon-xiezi:before {
+  content: "\e6be";
+}
+
+.icon-zuhe:before {
+  content: "\e647";
+}
+
+.icon-fileplus-fill:before {
+  content: "\e7c6";
+}
+
+.icon-expandalt-fill:before {
+  content: "\e7e4";
+}
+
+.icon-eye-slash:before {
+  content: "\e7ec";
+}
+
+.icon-eye:before {
+  content: "\e7ed";
+}
+
+.icon-reply:before {
+  content: "\e82f";
+}
+
+.icon-share:before {
+  content: "\e86e";
+}
+
+.icon-Directory-tree:before {
+  content: "\e892";
+}
+
+.icon-workflow-copy:before {
+  content: "\f078";
+}
+
+.icon-servicemeshfuwuwangge-copy:before {
+  content: "\f076";
+}
+
+.icon-servicemeshfu-copy-copy:before {
+  content: "\f077";
+}
+
+.icon-dituleiwanggequ-copy:before {
+  content: "\f072";
+}
+
+.icon-fangxingweixuanzhong-copy:before {
+  content: "\f073";
+}
+
+.icon-daqilitiguancex:before {
+  content: "\e661";
+}
+
+.icon-VE:before {
+  content: "\e666";
+}
+
+.icon-customer-info:before {
+  content: "\e667";
+}
+
+.icon-product:before {
+  content: "\e66c";
+}
+
+.icon-distribution:before {
+  content: "\e671";
+}
+
+.icon-litijiankong-copy:before {
+  content: "\f074";
+}
+
+.icon-dulitixi-copy-copy-copy-copy-copy:before {
+  content: "\f075";
+}
+
+.icon-litipouqie:before {
+  content: "\e603";
+}
+
+.icon-rongqi:before {
+  content: "\e625";
+}
+
+.icon-lifangtilitiduomiantifangkuai:before {
+  content: "\e600";
+}
+
+.icon--SearchDatabaseFlat:before {
+  content: "\f071";
+}
+
+
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-2[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/less-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/children.vue?vue&type=style&index=0&lang=less& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
 .app1-children {
   border: 1px solid red;
   background: red;
   color: #ffff;
 }
 
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/App.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-1[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/App.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
 
 .vue-app1 {
   border: black solid 1px;

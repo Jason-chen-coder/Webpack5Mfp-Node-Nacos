@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-20 15:31:00
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-06 10:36:46
+ * @LastEditTime: 2021-09-16 14:16:19
  */
 const express = require('express');
 const app = express();
@@ -13,6 +13,8 @@ const { address } = require('ip');
 const ipAddr = address();
 // nacos相关
 const { NacosNamingClient, } = require('nacos');
+const proxy = require('http-proxy-middleware');
+
 // 我们当前应用的端口号
 const port = 9090
 const logger = console
@@ -41,10 +43,41 @@ const client = new NacosNamingClient({
   namespace: providerNamespase,
 });
 
+
+(async () => {
+  let allInstances = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT', false);
+  const appInfo = allInstances.filter(item => item.metadata.componentName.includes('vue-app1')).pop();
+  const PROXY_VUEAPPONE = `http://${appInfo.metadata.serviceUrl}` || '';
+  console.log(PROXY_VUEAPPONE, '---------vue-app-one/反向代理PROXY_VUEAPPONE-----------')
+  app.use(
+    '/vue-app-one/css/vue-app-one/',
+    proxy({
+      target: PROXY_VUEAPPONE,
+      pathRewrite: {
+        '/vue-app-one/css/vue-app-one/': '',
+      },
+      changeOrigin: true,
+    }),
+  );
+  app.use(
+    '/vue-app-one',
+    proxy({
+      target: PROXY_VUEAPPONE,
+      pathRewrite: {
+        '/vue-app-one': '',
+      },
+      changeOrigin: true,
+    }),
+  );
+
+})();
+
 app.get('/nacos/getAllInstances', async (req, res) => {
   let allInstances = await client.getAllInstances(providerServiceName, 'DEFAULT_GROUP', 'DEFAULT', false)
   res.send(allInstances);
 });
+
+
 /*
  *getAllInstances获取所有实例
  *serviceName 服务名称

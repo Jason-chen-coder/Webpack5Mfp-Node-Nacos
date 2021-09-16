@@ -3,8 +3,9 @@
   \************************************************************************************/
 @font-face {
   font-family: "iconfont"; /* Project id 1870567 */
-  src: url(../font/iconfont.e8afb1d.woff2) format("woff2"), url(../font/iconfont.e697176.woff) format("woff"),
-    url(../font/iconfont.08b00db.ttf) format("truetype");
+  src: url(..//font/iconfont.e8afb1d.woff2) format('woff2'),
+       url(..//font/iconfont.e697176.woff) format('woff'),
+       url(..//font/iconfont.08b00db.ttf) format('truetype');
 }
 
 .iconfont {
@@ -130,3 +131,5 @@
 .icon--SearchDatabaseFlat:before {
   content: "\f071";
 }
+
+

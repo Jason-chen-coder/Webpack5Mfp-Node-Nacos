@@ -1,0 +1,24 @@
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/less-loader/dist/cjs.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/App.vue?vue&type=style&index=0&lang=less& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+.vue-app3 {
+  text-align: center;
+}
+.mfp-area {
+  display: flex;
+  justify-content: space-evenly;
+  height: 1000px;
+}
+.app1-area,
+.app2-area {
+  border: 1px solid black;
+  width: 40%;
+}
+.app1-box,
+.app2-box {
+  height: 98%;
+}
+.title {
+  height: 2%;
+}
+

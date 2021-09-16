@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 14:09:16
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-07 10:49:38
+ * @LastEditTime: 2021-09-16 14:14:15
  */
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -23,7 +23,8 @@ const result = {
   entry: './src/index.js',
   output: {
     path: resolve(__dirname, 'deploy'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: './vue-app-one/'
   },
   module: {
     rules: [
@@ -41,14 +42,22 @@ const result = {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: "css-loader" }
+          {
+            loader: "css-loader", options: {
+              esModule: true,
+            }
+          }
         ]
       },
       {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: "css-loader" },
+          {
+            loader: "css-loader", options: {
+              esModule: true,
+            }
+          },
           { loader: "less-loader" }
         ]
       },
@@ -73,7 +82,7 @@ const result = {
         options: {
           limit: 0,
           esModule: false, //关闭es模块语法
-          name: '/font/[name].[contenthash:7].[ext]',
+          name: 'css/[name].[ext]',
         },
         type: 'javascript/auto'
       },

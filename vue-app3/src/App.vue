@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-07 10:41:49
+ * @LastEditTime: 2021-09-16 11:13:40
 -->
 <template>
   <div class="vue-app3">
@@ -55,6 +55,7 @@ export default {
         nacosInstancesList = await res.json();
         let app1Info = nacosInstancesList.filter(item => item.metadata.componentName.includes('app1')).pop();
         serAdd = `http://${app1Info.metadata.address}`;
+        console.log('----------', serAdd)
       } catch {
         serAdd = `./mfpApps/app1/deploy/app1.js`
       }

@@ -4,7 +4,7 @@
  * @Author: Jason chen
  * @Date: 2021-08-18 15:09:23
  * @LastEditors: Jason chen
- * @LastEditTime: 2021-09-07 10:57:13
+ * @LastEditTime: 2021-09-16 10:53:53
 -->
 <template>
   <div class="vue-app1">
@@ -24,7 +24,7 @@
   </div>
 </template>
 <script>
-
+import './assets/iconfont/iconfont.css'
 import children from './components/children.vue'
 export default {
   components: {
